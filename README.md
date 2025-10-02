@@ -18,11 +18,3 @@ The application includes two main roles:
 
 ---
 
-## Running the Application  
-
-1. Start the local server and database (e.g., using XAMPP).  
-2. Deploy the provided database structure.  
-3. From each service folder (authentication, backend, frontend), run:  
-   ```bash
-   npm install
-   node app
