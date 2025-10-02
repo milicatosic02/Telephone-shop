@@ -1,0 +1,1 @@
+{"brend":"2","naziv":"Galaxy S 21","opis":"Najbrzi telefon svoje generacije","memorija":"1","cena":"730","kolicina":"22"}

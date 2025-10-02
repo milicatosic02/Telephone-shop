@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "app_servis2m",
+			"path": ".."
+		},
+		{
+			"name": "telefoni_vue",
+			"path": "../../skript/app_vue/telefoni_vue"
+		},
+		{
+			"path": "../../skript/api_servis2"
+		},
+		{
+			"path": "../../auth_server2"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,39 @@
+node node_modules/sequelize-cli/lib/sequelize
+
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Torba --attributes naziv:string,opis:string,cena:int
+
+
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Brend --attributes naziv:string
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Memorija --attributes velicina:string
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Boja --attributes ime:string
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Telefon --attributes naziv:string,opis:string,cena:integer,kolicina:integer
+node node_modules/sequelize-cli/lib/sequelize model:generate --name TelefonBoja --attributes polje:string
+node node_modules/sequelize-cli/lib/sequelize model:generate --name Narudzbina --attributes vreme_narucivanja:DATE,zakazano_vreme:DATE,status:string,adresa:string,broj_telefona:string,ime_prezime:string
+node node_modules/sequelize-cli/lib/sequelize model:generate --name StavkaNarudzbine --attributes komada:integer,jedinicna_cena:integer
+
+node node_modules/sequelize-cli/lib/sequelize db:migrate
+
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-brendovi
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-memorije
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-boje
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-telefoni
+
+
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-torbeBoje
+
+
+
+
+
+
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-narudzbine  
+node node_modules/sequelize-cli/lib/sequelize seed:generate --name create-stavkeNarudzbine
+
+node node_modules/sequelize-cli/lib/sequelize db:migrate
+node node_modules/sequelize-cli/lib/sequelize db:seed:all
+node node_modules/sequelize-cli/lib/sequelize db:migrate:undo:all
+
+
+
+node node_modules/npx sequelize-cli migration:generate --name remove-id-from-torbaboja
+node node_modules/sequelize-cli/lib/sequelize db:migrate:undo:all

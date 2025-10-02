@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Memorije</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    main.container {
+      max-width: 800px; 
+       margin: 0 auto; 
+    }
+  </style>
+</head>
+<body>
+
+<main class="container">
+  <div class="row">
+<nav class="navbar navbar-expand-sm bg-light navbar-light" >
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Dashboard</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="telefoni.html">Ponuda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="narudzbine.html">Narudzbine</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="brendovi.html">Brendovi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="memorije.html">Memorije</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+  <h1 style="color: white;">Memorije</h1>
+  <form  method=post action=http://postman-echo.com/post id = "forma">
+    <dl class="row">
+      <dd class="col-sm-9">
+        <ul id="tipovi">
+          <!-- <li>Mala torba</li>
+          <li>Velika torba</li> -->
+        </ul>
+      </dd>
+      </dl>
+      <a href="nova-memorija.html" class="btn btn-danger float-end">Nova memorija</a>
+  </form>
+</main>
+
+
+<script>
+    window.addEventListener("load", async function(){
+      try {
+      let response = await fetch("http://localhost:9000/memorija/");
+      let data = await response.json();
+      console.log(data);
+  
+      for (let i = 0; i < data.length; i++) {
+  
+        let li1 = document.createElement("li");
+      li1.style.display = "flex"; // Postavi display na flex
+      li1.style.alignItems = "center"; 
+
+      let span = document.createElement("span");
+      span.innerHTML = data[i].velicina;
+      li1.appendChild(span);
+
+      let link = document.createElement("a");
+      var id = data[i].id;
+      link.className = "btn btn-link obrisi";
+        link.innerHTML = "Obriši";
+        li1.appendChild(link); // Dodaj link element umesto stringa
+        li1.dataset.id = id; // Snimi id u dataset
+        document.getElementById("tipovi").appendChild(li1);
+    }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+
+  document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("obrisi")) {
+      var id = event.target.parentNode.dataset.id;
+
+      if (confirm("Potvrdi brisanje")) {
+        fetch('http://localhost:9000/memorija/' + id, { method: "DELETE" })
+          .then(resp => resp.json())
+          .then(data => {
+            // response sadrzi samo id obrisanog
+            alert("Obrisan je zapis " + data);
+            window.location.href = 'http://localhost:8000/memorije.html';
+          })
+          .catch(err => console.log(err));
+      } else {
+        return;
+      }
+    }
+  });
+  
+  </script>
+
+</body>
+</html>
